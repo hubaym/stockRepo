@@ -76,47 +76,35 @@ drv <- dbDriver("PostgreSQL")
  head(AAPLyear)
  AAPLyear
  
- install.packages("raster")
- library(raster)
- r <- raster(nrows=10, ncols=10)
- r <- setValues(r, 1:ncell(r))
- r <- as.raster(c(0.5, 1, 0.5))
- r[5]
- seq1 <- seq(1:6)
- mat1 <- matrix(seq1, 2)
- r <- as.raster(mat1)
- plot(r)
- y<-matrix(rnorm(25),5,5)
- y
- plot(y)
+ install.packages("ggplot2")
+ library('ggplot2')
  
- df <- data.frame(matrix(ncol = 11, nrow = 10))
- df
- rownames(df) <-c(1:10)
- colnames(df) <-c(1:11)
- for (i in 1:30){
+ xx <- 
+ yy
+ zz
+ 
+ fun <- data.frame(
+   x = rep(c(1:100), 100),
+   y = sort(  rep(c(1:100), 100) ),
+   z = c(1:10000)
+ )
+ ggplot(data = fun, aes(x = x, y = y, colour = z)) + geom_point(size = 1)
+ 
+ init <- function (x){
+   x$AAPL.WPR14 <- 0
+   x$AAPL.WPRbool <- 0
+   x$AAPL.WPRsign <- 0
+   x$AAPL.SLval <- 0
+   x$AAPL.OutSLbool <- 0
+   x$AAPL.TPval <- 0
+   x$AAPL.OutTPbool <- 0
+   x$AAPL.Broker<- 0
+   x$AAPL.Ret<- 0
    
-   df$`i` <-c(i:i+9)
  }
- c(3:12)
- df$`1` <-c(1:10)
- df$`2` <-c(2:11)
- df$`3` <-c(3:12)
- df$`4` <-c(4:13)
- df$`5` <-c(5:14)
- df$`6` <-c(6:15)
- df$`7` <-c(7:16)
- df$`8` <-c(8:17)
- df$`9` <-c(9:18)
- df$`10` <-c(10:19)
- range01 <- function(x)(x-min(x))/diff(range(x))
- cRamp <- function(x){
-   cols <- colorRamp(topo.colors(10))(range01(x))
-   apply(cols, 1, function(xt)rgb(xt[1], xt[2], xt[3], maxColorValue=255))
- }  
-
- plot(df)
- df[,c(1,2)]
  
+ init(AAPLyear)
+ AAPL <- getSymbols("IBM", adjust=TRUE)
+ head(YHOO$Close)
  
  
